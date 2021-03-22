@@ -40,7 +40,7 @@ namespace WebApiLogin.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                return BuildToken(model, new List<string>());
+                return CrearToken(model, new List<string>());
             }
             else
             {
@@ -57,7 +57,7 @@ namespace WebApiLogin.Controllers
             {
                 var usuario = await _userManager.FindByEmailAsync(userInfo.Email);
                 var roles = await _userManager.GetRolesAsync(usuario);
-                return BuildToken(userInfo, roles);
+                return CrearToken(userInfo, roles);
             }
             else
             {
@@ -66,7 +66,7 @@ namespace WebApiLogin.Controllers
             }
         }
 
-        private UserToken BuildToken(UserInfo userInfo, IList<string> roles)
+        private UserToken CrearToken(UserInfo userInfo, IList<string> roles)
         {
             var claims = new List<Claim>
             {
